@@ -123,5 +123,5 @@ You can also set it to 'none' to disable any default behavior. Learn more: https
 
 > 参考链接
 
-- [webpack起步](https://webpack.docschina.org/guides/asset-management/#%E5%8A%A0%E8%BD%BD-css)
+- [管理资源](https://webpack.docschina.org/guides/asset-management/#%E5%8A%A0%E8%BD%BD-css)
 - [示例代码](https://github.com/1071942338/WebpackStudyNotes/tree/master/06-%E5%8A%A0%E8%BD%BD%20CSS)
