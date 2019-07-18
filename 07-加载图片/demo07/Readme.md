@@ -1,0 +1,1 @@
+进入package.json所在目录执行 npm i 或者yarn 命令即可安装依赖
