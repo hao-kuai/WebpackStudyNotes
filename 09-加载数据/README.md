@@ -604,4 +604,7 @@ CSV (2) [Array(2), Array(2)]
     length: 2
 __proto__: Array(0)
 ```
+> 参考链接
 
+- [管理资源](https://webpack.docschina.org/guides/asset-management/#%E5%8A%A0%E8%BD%BD-css)
+- [示例代码](https://github.com/1071942338/WebpackStudyNotes/tree/master/09-%E5%8A%A0%E8%BD%BD%E6%95%B0%E6%8D%AE)
