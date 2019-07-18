@@ -1,0 +1,19 @@
+{
+  "name": "demo02",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "css-loader": "^3.0.0",
+    "csv-loader": "^3.0.2",
+    "file-loader": "^4.0.0",
+    "papaparse": "^5.0.0",
+    "style-loader": "^0.23.1",
+    "webpack": "^4.35.3",
+    "webpack-cli": "^3.3.6",
+    "xml-loader": "^1.2.1"
+  },
+  "scripts": {
+    "build": "webpack"
+  }
+}
