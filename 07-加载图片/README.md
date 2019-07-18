@@ -1,15 +1,17 @@
 
-为了在 JavaScript 模块中 import 一个 CSS 文件，需要使用 [style-loader](https://webpack.docschina.org/loaders/style-loader) 和 [css-loader](https://webpack.docschina.org/loaders/css-loader)，对CSS文件进行处理；然后，在此模块执行过程中，将含有 CSS 字符串的 <style> 标签，插入到 html 文件的 <head> 中。
 
-## 一、安装 loader
+
+## 一、安装
 
 ```
-npm install --save-dev style-loader css-loader
+npm install --save-dev file-loader
 //或者
-yarn add style-loader css-loader --dev
+yarn add file-loader --dev
 ```
 
-## 二、编辑 webpack.config.js 文件
+
+## 二、编辑 webpack.config.js
+
 
 
 ```
@@ -21,27 +23,34 @@ const path = require('path');
       filename: 'bundle.js',
       path: path.resolve(__dirname, 'dist')
     },
-   module: {
-     rules: [
-       {
-         test: /\.css$/,
-         use: [
-           'style-loader',
-           'css-loader'
-         ]
-       }
-     ]
-   }
- };
+    module: {
+      rules: [
+        {
+          test: /\.css$/,
+          use: [
+            'style-loader',
+            'css-loader'
+          ]
+        },
++       {
++         test: /\.(png|svg|jpg|gif)$/,
++         use: [
++           'file-loader'
++         ]
++       }
+      ]
+    }
+  };
 ```
 
-> webpack 根据正则表达式，来确定应该查找哪些文件，并将其提供给指定的 loader。在这个示例中，所有以 .css 结尾的文件，都将被提供给 style-loader 和 css-loader。
+在 `import MyImage from './my-image.png'` 时，此图像将被处理并添加到 output 目录,即 dist 目录，并且 MyImage 变量将包含该图像在处理后的最终 url。
 
-## 三、添加 CSS 文件并使用
 
-### 3.1 添加 style.css 文件
-在 /src 目录中添加一个新的 style.css 文件，并将其 import 到 index.js 中：
 
+## 三、添加图片
+
+
+将图片添加到 src 目录下
 ```
 webpack-demo
   |- package.json
@@ -50,25 +59,18 @@ webpack-demo
     |- bundle.js
     |- index.html
   |- /src
++   |- icon.jpg
     |- style.css
     |- index.js
   |- /node_modules
 ```
 
-style.css 
+## 三、编辑 index.js
 
-
-```
-.hello {
-  color: red;
-}
-```
-
-### 3.2 编辑 index.js
-
-
+ 
 ```
 import "./style.css"
+import Icon from './icon.jpg';
 //生成一个内容为Hello webpack !的div标签
 function component() {
     let element = document.createElement('div');
@@ -79,49 +81,72 @@ function component() {
 }
 //将生成的div标签添加到body中去
 document.body.appendChild(component());
+
+
+function addImage() {
+    let element = document.createElement('img');
+    //设置图片路径
+    element.src = Icon;
+    //添加class
+    element.classList.add("image");
+    return element;
+}
+//将生成的img标签添加到body中去
+document.body.appendChild(addImage());
+```
+## 四、编辑 style.css
+
+
+
+```
+.hello{
+    color: red;
+}
+.image{
+    width: 100px;
+    height: 100px;
+}
 ```
 
-## 四、 运行 build 命令
 
+## 五、重新构建
 
 ```
 npm run build
-//或者
-yarn build
 ```
 
-
+构建结果
 
 ```
 yarn run v1.16.0
 $ webpack
-Hash: 319dbf117b6cd4a0fa81
+Hash: 0d706eb339f3d984e779
 Version: webpack 4.35.3
-Time: 511ms
-Built at: 07/17/2019 4:26:23 PM
-    Asset      Size  Chunks             Chunk Names
-bundle.js  6.97 KiB       0  [emitted]  main
+Time: 495ms
+Built at: 07/18/2019 11:29:29 AM
+                               Asset      Size  Chunks             Chunk Names
+76e7e08e0b3a04a612c89ad13c999813.jpg    51 KiB          [emitted]  
+                           bundle.js  7.23 KiB       0  [emitted]  main
 Entrypoint main = bundle.js
-[0] ./src/index.js 285 bytes {0} [built]
-[1] ./src/style.css 1.06 KiB {0} [built]
-[2] ./node_modules/css-loader/dist/cjs.js!./src/style.css 165 bytes {0} [built]
+[0] ./src/icon.jpg 82 bytes {0} [built]
+[1] ./src/index.js 572 bytes {0} [built]
+[2] ./src/style.css 1.06 KiB {0} [built]
+[3] ./node_modules/css-loader/dist/cjs.js!./src/style.css 216 bytes {0} [built]
     + 3 hidden modules
 
 WARNING in configuration
 The 'mode' option has not been set, webpack will fallback to 'production' for this value. Set 'mode' option to 'development' or 'production' to enable defaults for each environment.
 You can also set it to 'none' to disable any default behavior. Learn more: https://webpack.js.org/configuration/mode/
-✨  Done in 1.18s.
+✨  Done in 1.15s.
 
 ```
 
+## 六、打开 index.html 文件
 
-再次在浏览器中打开 index.html，你应该看到 Hello webpack 现在的样式是红色。
+如果一切顺利可以看到 Hello webpack 文本下边的 img 元素。
 
-## 五、 验证
-
-在Chrome浏览器中右键单击选择**检查**页面（不要查看页面源代码，通过js动态插入的，所以看不到），并查看页面的 head 标签。可以看到包含 style 块元素，也就是在 index.js 中 import 的 css 文件中的样式。
 
 > 参考链接
 
-- [webpack起步](https://webpack.docschina.org/guides/asset-management/#%E5%8A%A0%E8%BD%BD-css)
-- [示例代码](https://github.com/1071942338/WebpackStudyNotes/tree/master/06-%E5%8A%A0%E8%BD%BD%20CSS)
+- [管理资源](https://webpack.docschina.org/guides/asset-management/#%E5%8A%A0%E8%BD%BD-css)
+- [示例代码](https://github.com/1071942338/WebpackStudyNotes/tree/master/07-%E5%8A%A0%E8%BD%BD%E5%9B%BE%E7%89%87)
