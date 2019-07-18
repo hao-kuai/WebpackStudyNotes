@@ -1,0 +1,15 @@
+ @font-face {
+   font-family: "MyFont";
+   src:  url('./华文彩云.ttf');
+   font-weight: 600;
+   font-style: normal;
+}
+.hello{
+    color: red;
+    font-size: 30px;
+    font-family: "MyFont";
+}
+.image{
+    width: 100px;
+    height: 100px;
+}
