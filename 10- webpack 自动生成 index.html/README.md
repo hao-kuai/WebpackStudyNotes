@@ -1,127 +1,153 @@
+index.html 文件是手动创建编辑的，js 文件是 webpack 自动生成的。当js文件名称改变时还需要手动修改 index.html 文件，随着应用程序增长， index.html 文件进行管理，一切就会变得困难起来。然而，可以通过插件 [HtmlWebpackPlugin](https://www.webpackjs.com/plugins/html-webpack-plugin) ，自动完成这个任务。
 
-为了在 JavaScript 模块中 import 一个 CSS 文件，需要使用 [style-loader](https://webpack.docschina.org/loaders/style-loader) 和 [css-loader](https://webpack.docschina.org/loaders/css-loader)，对CSS文件进行处理；然后，在此模块执行过程中，将含有 CSS 字符串的 <style> 标签，插入到 html 文件的 <head> 中。
-
-## 一、安装 loader
-
-```
-npm install --save-dev style-loader css-loader
-//或者
-yarn add style-loader css-loader --dev
-```
-
-## 二、编辑 webpack.config.js 文件
-
+## 一、安装插件
 
 ```
-const path = require('path');
-
-  module.exports = {
-    entry: './src/index.js',
-    output: {
-      filename: 'bundle.js',
-      path: path.resolve(__dirname, 'dist')
-    },
-   module: {
-     rules: [
-       {
-         test: /\.css$/,
-         use: [
-           'style-loader',
-           'css-loader'
-         ]
-       }
-     ]
-   }
- };
+npm install --save-dev html-webpack-plugin
+//
+yarn add html-webpack-plugin --dev
 ```
-
-> webpack 根据正则表达式，来确定应该查找哪些文件，并将其提供给指定的 loader。在这个示例中，所有以 .css 结尾的文件，都将被提供给 style-loader 和 css-loader。
-
-## 三、添加 CSS 文件并使用
-
-### 3.1 添加 style.css 文件
-在 /src 目录中添加一个新的 style.css 文件，并将其 import 到 index.js 中：
+安装成功
 
 ```
-webpack-demo
-  |- package.json
-  |- webpack.config.js
-  |- /dist
-    |- bundle.js
-    |- index.html
-  |- /src
-    |- style.css
-    |- index.js
-  |- /node_modules
-```
+yarn install v1.17.3
+[1/4] Resolving packages...
+[2/4] Fetching packages...
+info fsevents@1.2.9: The platform "win32" is incompatible with this module.
+info "fsevents@1.2.9" is an optional dependency and failed compatibility check. Excluding it from installation.
+[3/4] Linking dependencies...
+[4/4] Building fresh packages...
+Done in 3.50s.
 
-style.css 
-
-
-```
-.hello {
-  color: red;
-}
-```
-
-### 3.2 编辑 index.js
-
-
-```
-import "./style.css"
-//生成一个内容为Hello webpack !的div标签
-function component() {
-    let element = document.createElement('div');
-    element.innerHTML = "Hello webpack !";
-    //添加class
-    element.classList.add("hello");
-    return element;
-}
-//将生成的div标签添加到body中去
-document.body.appendChild(component());
-```
-
-## 四、 运行 build 命令
-
-
-```
-npm run build
-//或者
-yarn build
-```
-
-
-
-```
-yarn run v1.16.0
+F:\GitHub\WebpackStudyNotes\10- webpack 自动生成 index.html\demo10>yarn build
+yarn run v1.17.3
 $ webpack
-Hash: 319dbf117b6cd4a0fa81
+Hash: 39c4703dc74c68d3bf1f
 Version: webpack 4.35.3
-Time: 511ms
-Built at: 07/17/2019 4:26:23 PM
+Time: 563ms
+Built at: 2019-07-19 20:29:28
     Asset      Size  Chunks             Chunk Names
-bundle.js  6.97 KiB       0  [emitted]  main
+bundle.js  1.02 KiB       0  [emitted]  main
 Entrypoint main = bundle.js
-[0] ./src/index.js 285 bytes {0} [built]
-[1] ./src/style.css 1.06 KiB {0} [built]
-[2] ./node_modules/css-loader/dist/cjs.js!./src/style.css 165 bytes {0} [built]
-    + 3 hidden modules
+[0] ./src/index.js 250 bytes {0} [built]
 
 WARNING in configuration
 The 'mode' option has not been set, webpack will fallback to 'production' for this value. Set 'mode' option to 'development' or 'production' to enable defaults for each environment.
 You can also set it to 'none' to disable any default behavior. Learn more: https://webpack.js.org/configuration/mode/
-✨  Done in 1.18s.
+Done in 3.62s.
+
+F:\GitHub\WebpackStudyNotes\10- webpack 自动生成 index.html\demo10>
+F:\GitHub\WebpackStudyNotes\10- webpack 自动生成 index.html\demo10>
+F:\GitHub\WebpackStudyNotes\10- webpack 自动生成 index.html\demo10>
+F:\GitHub\WebpackStudyNotes\10- webpack 自动生成 index.html\demo10>
+F:\GitHub\WebpackStudyNotes\10- webpack 自动生成 index.html\demo10>yarn add html-webpack-plugin --dev
+yarn add v1.17.3
+[1/4] Resolving packages...
+[2/4] Fetching packages...
+info fsevents@1.2.9: The platform "win32" is incompatible with this module.
+info "fsevents@1.2.9" is an optional dependency and failed compatibility check. Excluding it from installation.
+[3/4] Linking dependencies...
+[4/4] Building fresh packages...
+success Saved lockfile.
+success Saved 32 new dependencies.
+info Direct dependencies
+└─ html-webpack-plugin@3.2.0
+info All dependencies
+├─ camel-case@3.0.0
+├─ clean-css@4.2.1
+├─ commander@2.17.1
+├─ css-select@1.2.0
+├─ css-what@2.1.3
+├─ dom-converter@0.2.0
+├─ domelementtype@1.3.1
+├─ domhandler@2.4.2
+├─ domutils@1.5.1
+├─ es-abstract@1.13.0
+├─ es-to-primitive@1.2.0
+├─ has-symbols@1.0.0
+├─ has@1.0.3
+├─ he@1.2.0
+├─ html-minifier@3.5.21
+├─ html-webpack-plugin@3.2.0
+├─ htmlparser2@3.10.1
+├─ is-date-object@1.0.1
+├─ is-regex@1.0.4
+├─ is-symbol@1.0.2
+├─ lodash@4.17.15
+├─ lower-case@1.1.4
+├─ nth-check@1.0.2
+├─ object.getownpropertydescriptors@2.0.3
+├─ param-case@2.1.1
+├─ pretty-error@2.1.1
+├─ relateurl@0.2.7
+├─ renderkid@2.0.3
+├─ toposort@1.0.7
+├─ uglify-js@3.4.10
+├─ upper-case@1.1.3
+└─ util.promisify@1.0.0
+Done in 69.39s.
 
 ```
 
 
-再次在浏览器中打开 index.html，你应该看到 Hello webpack 现在的样式是红色。
+## 二、编辑 webpack.config.js
 
-## 五、 验证
+```
+const path = require('path');
+const HtmlWebpackPlugin  = require("html-webpack-plugin")
+module.exports = {
+    entry: './src/index.js',
+    output: {
+        filename: '[name].bundle.js',
+        path: path.resolve(__dirname, 'dist')
+    },
+    plugins:[
+        new HtmlWebpackPlugin({
+            title: "10- webpack 自动生成 index.html"//配置title属性
+        }),
+    ]
+};
+```
 
-在Chrome浏览器中右键单击选择**检查**页面（不要查看页面源代码，通过js动态插入的，所以看不到），并查看页面的 head 标签。可以看到包含 style 块元素，也就是在 index.js 中 import 的 css 文件中的样式。
+> 更多[属性配置](https://github.com/jantimon/html-webpack-plugin#configuration)
+## 三、删除 dist 目录下的 index.html 文件
+
+## 四、执行构建指令
+```
+npm run build
+//或者
+yanr build
+```
+构建完成
+
+```
+yarn run v1.17.3
+$ webpack
+Hash: 47a0ff4443612ee847a5
+Version: webpack 4.35.3
+Time: 875ms
+Built at: 2019-07-19 21:44:40
+         Asset       Size  Chunks             Chunk Names
+    index.html  203 bytes          [emitted]
+main.bundle.js   1.02 KiB       0  [emitted]  main
+Entrypoint main = main.bundle.js
+[0] ./src/index.js 250 bytes {0} [built]
+
+WARNING in configuration
+The 'mode' option has not been set, webpack will fallback to 'production' for this value. Set 'mode' option to 'development' or 'production' to enable defaults for each environment.
+You can also set it to 'none' to disable any default behavior. Learn more: https://webpack.js.org/configuration/mode/
+Child html-webpack-plugin for "index.html":
+     1 asset
+    Entrypoint undefined = index.html
+    [2] (webpack)/buildin/global.js 472 bytes {0} [built]
+    [3] (webpack)/buildin/module.js 497 bytes {0} [built]
+        + 2 hidden modules
+Done in 2.91s.
+```
+### 五、 运行 index.html 文件
+在 Chrome 浏览器中打开文件，可以看到标题为：`10- webpack 自动生成 index.html`，内容区显示 `Hello Webpack ！`字样。
 
 > 参考链接
 
-- [管理资源](https://webpack.docschina.org/guides/asset-management/#%E5%8A%A0%E8%BD%BD-css)
-- [示例代码](https://github.com/1071942338/WebpackStudyNotes/tree/master/06-%E5%8A%A0%E8%BD%BD%20CSS)
+- [管理输出](https://www.webpackjs.com/guides/output-management/#%E8%AE%BE%E5%AE%9A-htmlwebpackplugin)
+- [示例代码](https://github.com/1071942338/WebpackStudyNotes/tree/master/10-%20webpack%20%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%90%20index.html)
