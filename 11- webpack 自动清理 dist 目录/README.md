@@ -167,5 +167,5 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 > 参考链接
 
 - [管理输出](https://www.webpackjs.com/guides/output-management/#%E8%AE%BE%E5%AE%9A-htmlwebpackplugin)
-- [示例代码](https://github.com/1071942338/WebpackStudyNotes/tree/master/10-%20webpack%20%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%90%20index.html)
+- [示例代码](https://github.com/1071942338/WebpackStudyNotes/tree/master/11-%20webpack%20%E8%87%AA%E5%8A%A8%E6%B8%85%E7%90%86%20dist%20%E7%9B%AE%E5%BD%95)
 - [Clean plugin for webpack](https://www.npmjs.com/package/clean-webpack-plugin)
