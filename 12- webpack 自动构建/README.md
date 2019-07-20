@@ -1,171 +1,261 @@
-由于每次执行构建命令，webpack 都会在 dist 目录生成文件，导该目录 文件夹相当杂乱。
-通常，在每次构建前清理 dist 目录，是比较推荐的做法，因此只会生成用到的文件。通过
-[clean-webpack-plugin](https://www.npmjs.com/package/clean-webpack-plugin)  插件完成自动清理任务。
+每次要编译代码时，手动运行 `npm run build` 就会变得很麻烦。使用 [webpack-dev-server](https://www.npmjs.com/package/webpack-dev-server#getting-started) 可以帮助你在代码发生变化后自动编译代码。提供了一个简单的 web 服务器，并且能够实时重新加载(live reloading)。
 
-## 一、安装插件
+## 一、安装
 
 ```
-npm install --save-dev clean-webpack-plugin
-//
-yarn add clean-webpack-plugin --dev
+npm install --save-dev webpack-dev-server
+//或者
+yarn add  webpack-dev-server --dev
 ```
+
 安装成功
 
 ```
+yarn install v1.17.3
+[1/4] Resolving packages...
+success Already up-to-date.
+Done in 0.41s.
+
+F:\GitHub\WebpackStudyNotes\12- webpack 自动构建\demo12>
+F:\GitHub\WebpackStudyNotes\12- webpack 自动构建\demo12>
+F:\GitHub\WebpackStudyNotes\12- webpack 自动构建\demo12>
+F:\GitHub\WebpackStudyNotes\12- webpack 自动构建\demo12>yarn add  webpack-dev-server --dev
 yarn add v1.17.3
 [1/4] Resolving packages...
+info There appears to be trouble with your network connection. Retrying...
 [2/4] Fetching packages...
+info There appears to be trouble with your network connection. Retrying...
 info fsevents@1.2.9: The platform "win32" is incompatible with this module.
 info "fsevents@1.2.9" is an optional dependency and failed compatibility check. Excluding it from installation.
 [3/4] Linking dependencies...
 [4/4] Building fresh packages...
-success Saved lockfile.
-success Saved 19 new dependencies.
-info Direct dependencies
-└─ clean-webpack-plugin@3.0.0
-info All dependencies
-├─ @types/anymatch@1.3.1
-├─ @types/events@3.0.0
-├─ @types/glob@7.1.1
-├─ @types/minimatch@3.0.3
-├─ @types/tapable@1.0.4
-├─ @types/uglify-js@3.0.4
-├─ @types/webpack@4.4.35
-├─ array-union@1.0.2
-├─ array-uniq@1.0.3
-├─ clean-webpack-plugin@3.0.0
-├─ del@4.1.1
-├─ globby@6.1.0
-├─ is-path-cwd@2.2.0
-├─ is-path-in-cwd@2.1.0
-├─ is-path-inside@2.1.0
-├─ p-map@2.1.0
-├─ path-is-inside@1.0.2
-├─ pinkie-promise@2.0.1
-└─ pinkie@2.0.4
-Done in 38.32s.
 
+success Saved lockfile.
+success Saved 87 new dependencies.
+info Direct dependencies
+└─ webpack-dev-server@3.7.2
+info All dependencies
+├─ accepts@1.3.7
+├─ ansi-colors@3.2.4
+├─ ansi-html@0.0.7
+├─ array-flatten@1.1.1
+├─ async@1.5.2
+├─ batch@0.6.1
+├─ body-parser@1.19.0
+├─ bonjour@3.5.0
+├─ buffer-indexof@1.1.1
+├─ cliui@4.1.0
+├─ compressible@2.0.17
+├─ compression@1.7.4
+├─ connect-history-api-fallback@1.6.0
+├─ content-disposition@0.5.3
+├─ cookie-signature@1.0.6
+├─ cookie@0.4.0
+├─ deep-equal@1.0.1
+├─ default-gateway@4.2.0
+├─ destroy@1.0.4
+├─ detect-node@2.0.4
+├─ dns-equal@1.0.0
+├─ dns-packet@1.3.1
+├─ dns-txt@2.0.2
+├─ ee-first@1.1.1
+├─ eventemitter3@3.1.2
+├─ eventsource@1.0.7
+├─ express@4.17.1
+├─ faye-websocket@0.10.0
+├─ finalhandler@1.1.2
+├─ follow-redirects@1.7.0
+├─ forwarded@0.1.2
+├─ get-caller-file@1.0.3
+├─ handle-thing@2.0.0
+├─ hpack.js@2.1.6
+├─ html-entities@1.2.1
+├─ http-deceiver@1.2.7
+├─ http-parser-js@0.4.10
+├─ http-proxy-middleware@0.19.1
+├─ http-proxy@1.17.0
+├─ internal-ip@4.3.0
+├─ ip-regex@2.1.0
+├─ ip@1.1.5
+├─ ipaddr.js@1.9.1
+├─ json3@3.3.3
+├─ killable@1.0.1
+├─ loglevel@1.6.3
+├─ media-typer@0.3.0
+├─ merge-descriptors@1.0.1
+├─ methods@1.1.2
+├─ mime-db@1.40.0
+├─ mime@2.4.4
+├─ multicast-dns-service-types@1.1.0
+├─ multicast-dns@6.2.3
+├─ negotiator@0.6.2
+├─ node-forge@0.7.5
+├─ obuf@1.1.2
+├─ on-headers@1.0.2
+├─ opn@5.5.0
+├─ original@1.0.2
+├─ p-retry@3.0.1
+├─ path-to-regexp@0.1.7
+├─ portfinder@1.0.21
+├─ proxy-addr@2.0.5
+├─ querystringify@2.1.1
+├─ raw-body@2.4.0
+├─ require-main-filename@1.0.1
+├─ retry@0.12.0
+├─ select-hose@2.0.0
+├─ selfsigned@1.10.4
+├─ serve-index@1.9.1
+├─ serve-static@1.14.1
+├─ sockjs-client@1.3.0
+├─ sockjs@0.3.19
+├─ spdy-transport@3.0.0
+├─ spdy@4.0.0
+├─ thunky@1.0.3
+├─ type-is@1.6.18
+├─ unpipe@1.0.0
+├─ utils-merge@1.0.1
+├─ uuid@3.3.2
+├─ wbuf@1.7.3
+├─ webpack-dev-middleware@3.7.0
+├─ webpack-dev-server@3.7.2
+├─ websocket-extensions@0.1.3
+├─ wrap-ansi@2.1.0
+├─ yargs-parser@11.1.1
+└─ yargs@12.0.5
+Done in 135.14s.
 
 ```
 
 
 ## 二、编辑 webpack.config.js
 
+修改配置文件，告诉开发服务器(dev server)，在哪里查找文件：
+
+
 ```
 const path = require('path');
 const HtmlWebpackPlugin  = require("html-webpack-plugin")
+const {CleanWebpackPlugin}  = require("clean-webpack-plugin")
 module.exports = {
     entry: './src/index.js',
     output: {
         filename: '[name].bundle.js',
         path: path.resolve(__dirname, 'dist')
     },
+    devServer:{
+        contentBase:"./dist"
+    },
     plugins:[
         new HtmlWebpackPlugin({
             title: "10- webpack 自动生成 index.html"//配置title属性
         }),
+        new CleanWebpackPlugin(),
+
     ]
 };
 ```
+以上配置告知 webpack-dev-server，在 localhost:8080 下建立服务，将 dist 目录下的文件，作为可访问文件。
+## 三、编辑 package.json 
 
-## 三、执行构建指令
+
 ```
-npm run build
+{
+  "name": "demo02",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "clean-webpack-plugin": "^3.0.0",
+    "css-loader": "^3.0.0",
+    "html-webpack-plugin": "^3.2.0",
+    "style-loader": "^0.23.1",
+    "webpack": "^4.35.3",
+    "webpack-cli": "^3.3.6",
+    "webpack-dev-server": "^3.7.2"
+  },
+  "scripts": {
+    "build": "webpack",
+    "start": "webpack-dev-server"
+  }
+}
+
+```
+
+## 四、运行 start 指令
+
+```
+npm run start 
 //或者
-yanr build
+yarn start
 ```
-构建完成
+运行成功
+
 
 ```
 yarn run v1.17.3
-$ webpack
-Hash: 47a0ff4443612ee847a5
+$ webpack-dev-server
+i ｢wds｣: Project is running at http://localhost:8080/
+i ｢wds｣: webpack output is served from /
+i ｢wds｣: Content not from webpack is served from ./dist
+i ｢wdm｣: Hash: 80ca53e91aed9fc00e90
 Version: webpack 4.35.3
-Time: 392ms
-Built at: 2019-07-19 22:14:56
+Time: 653ms
+Built at: 2019-07-20 16:04:54
          Asset       Size  Chunks             Chunk Names
     index.html  203 bytes          [emitted]
-main.bundle.js   1.02 KiB       0  [emitted]  main
+main.bundle.js    360 KiB    main  [emitted]  main
 Entrypoint main = main.bundle.js
-[0] ./src/index.js 250 bytes {0} [built]
-
-WARNING in configuration
-The 'mode' option has not been set, webpack will fallback to 'production' for this value. Set 'mode' option to 'development' or 'production' to enable defaults for each environment.
-You can also set it to 'none' to disable any default behavior. Learn more: https://webpack.js.org/configuration/mode/
+[0] multi (webpack)-dev-server/client?http://localhost ./src/index.js 40 bytes {main} [built]
+[./node_modules/ansi-html/index.js] 4.16 KiB {main} [built]
+[./node_modules/ansi-regex/index.js] 135 bytes {main} [built]
+[./node_modules/html-entities/index.js] 231 bytes {main} [built]
+[./node_modules/loglevel/lib/loglevel.js] 7.68 KiB {main} [built]
+[./node_modules/strip-ansi/index.js] 161 bytes {main} [built]
+[./node_modules/webpack-dev-server/client/index.js?http://localhost] (webpack)-dev-server/client?http://localhost 4.29 KiB {main} [built]
+[./node_modules/webpack-dev-server/client/overlay.js] (webpack)-dev-server/client/overlay.js 3.51 KiB {main} [built]
+[./node_modules/webpack-dev-server/client/socket.js] (webpack)-dev-server/client/socket.js 1.53 KiB {main} [built]
+[./node_modules/webpack-dev-server/client/utils/createSocketUrl.js] (webpack)-dev-server/client/utils/createSocketUrl.js 2.77 KiB {main} [built]
+[./node_modules/webpack-dev-server/client/utils/log.js] (webpack)-dev-server/client/utils/log.js 964 bytes {main} [built]
+[./node_modules/webpack-dev-server/client/utils/reloadApp.js] (webpack)-dev-server/client/utils/reloadApp.js 1.63 KiB {main} [built]
+[./node_modules/webpack-dev-server/client/utils/sendMessage.js] (webpack)-dev-server/client/utils/sendMessage.js 402 bytes {main} [built]
+[./node_modules/webpack/hot sync ^\.\/log$] (webpack)/hot sync nonrecursive ^\.\/log$ 170 bytes {main} [built]
+[./src/index.js] 250 bytes {main} [built]
+    + 18 hidden modules
 Child html-webpack-plugin for "index.html":
      1 asset
     Entrypoint undefined = index.html
-    [2] (webpack)/buildin/global.js 472 bytes {0} [built]
-    [3] (webpack)/buildin/module.js 497 bytes {0} [built]
-        + 2 hidden modules
-Done in 2.37s.
+    [./node_modules/html-webpack-plugin/lib/loader.js!./node_modules/html-webpack-plugin/default_index.ejs] 376 bytes {0} [built]
+    [./node_modules/lodash/lodash.js] 528 KiB {0} [built]
+    [./node_modules/webpack/buildin/global.js] (webpack)/buildin/global.js 472 bytes {0} [built]
+    [./node_modules/webpack/buildin/module.js] (webpack)/buildin/module.js 497 bytes {0} [built]
+i ｢wdm｣: Compiled successfully.
 
 ```
-## 四、 运行 index.html 文件
-在 Chrome 浏览器中打开文件，可以看到标题为：`10- webpack 自动生成 index.html`，内容区显示 `Hello Webpack ！`字样。而且其余多余文件被自动清理。
 
 
-## 五、注意
-编辑 webpack.config.js 文件时，如果这样引入插件
+## 五、运行 index.html
+
+在 Chrome 浏览器中打开 http://localhost:8080/ ，可以看到 `Hello webpack ！`字样
+
+## 六、 编辑 index.js 
+
 
 ```
-const CleanWebpackPlugin = require('clean-webpack-plugin');
+//生成一个内容为Hello webpack !的div标签
+function component() {
+    let element = document.createElement('div');
+    element.innerHTML = "Hello webpack !你好！";
+    //添加class
+    return element;
+}
+//将生成的div标签添加到body中去
+document.body.appendChild(component());
 ```
-
-
-会报错
-
-```
-yarn run v1.17.3
-$ webpack
-F:\GitHub\WebpackStudyNotes\11- webpack 自动清理 dist 目录\demo11\node_modules\webpack-cli\bin\cli.js:93
-                                throw err;
-                                ^
-
-TypeError: CleanWebpackPlugin is not a constructor
-    at Object.<anonymous> (F:\GitHub\WebpackStudyNotes\11- webpack 自动清理 dist 目录\demo11\webpack.config.js:14:9)
-    at Module._compile (F:\GitHub\WebpackStudyNotes\11- webpack 自动清理 dist 目录\demo11\node_modules\v8-compile-cache\v8-compile-cache.js:192:30)
-    at Object.Module._extensions..js (module.js:663:10)
-    at Module.load (module.js:565:32)
-    at tryModuleLoad (module.js:505:12)
-    at Function.Module._load (module.js:497:3)
-    at Module.require (module.js:596:17)
-    at require (F:\GitHub\WebpackStudyNotes\11- webpack 自动清理 dist 目录\demo11\node_modules\v8-compile-cache\v8-compile-cache.js:161:20)
-    at WEBPACK_OPTIONS (F:\GitHub\WebpackStudyNotes\11- webpack 自动清理 dist 目录\demo11\node_modules\webpack-cli\bin\utils\convert-argv.js:116:13)
-    at requireConfig (F:\GitHub\WebpackStudyNotes\11- webpack 自动清理 dist 目录\demo11\node_modules\webpack-cli\bin\utils\convert-argv.js:118:6)
-    at F:\GitHub\WebpackStudyNotes\11- webpack 自动清理 dist 目录\demo11\node_modules\webpack-cli\bin\utils\convert-argv.js:125:17
-    at Array.forEach (<anonymous>)
-    at module.exports (F:\GitHub\WebpackStudyNotes\11- webpack 自动清理 dist 目录\demo11\node_modules\webpack-cli\bin\utils\convert-argv.js:123:15)
-    at yargs.parse (F:\GitHub\WebpackStudyNotes\11- webpack 自动清理 dist 目录\demo11\node_modules\webpack-cli\bin\cli.js:71:45)
-    at Object.parse (F:\GitHub\WebpackStudyNotes\11- webpack 自动清理 dist 目录\demo11\node_modules\yargs\yargs.js:567:18)
-    at F:\GitHub\WebpackStudyNotes\11- webpack 自动清理 dist 目录\demo11\node_modules\webpack-cli\bin\cli.js:49:8
-    at Object.<anonymous> (F:\GitHub\WebpackStudyNotes\11- webpack 自动清理 dist 目录\demo11\node_modules\webpack-cli\bin\cli.js:365:3)
-    at Module._compile (module.js:652:30)
-    at Object.Module._extensions..js (module.js:663:10)
-    at Module.load (module.js:565:32)
-    at tryModuleLoad (module.js:505:12)
-    at Function.Module._load (module.js:497:3)
-    at Module.require (module.js:596:17)
-    at require (internal/module.js:11:18)
-    at Object.<anonymous> (F:\GitHub\WebpackStudyNotes\11- webpack 自动清理 dist 目录\demo11\node_modules\webpack\bin\webpack.js:156:2)
-    at Module._compile (module.js:652:30)
-    at Object.Module._extensions..js (module.js:663:10)
-    at Module.load (module.js:565:32)
-    at tryModuleLoad (module.js:505:12)
-    at Function.Module._load (module.js:497:3)
-error Command failed with exit code 1.
-info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
-
-```
-正确姿势是
-
-```
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-```
-
+然后保存
+浏览器中的页面自动刷新，并显示`Hello webpack ！你好！`
 
 > 参考链接
 
-- [管理输出](https://www.webpackjs.com/guides/output-management/#%E8%AE%BE%E5%AE%9A-htmlwebpackplugin)
-- [示例代码](https://github.com/1071942338/WebpackStudyNotes/tree/master/11-%20webpack%20%E8%87%AA%E5%8A%A8%E6%B8%85%E7%90%86%20dist%20%E7%9B%AE%E5%BD%95)
-- [Clean plugin for webpack](https://www.npmjs.com/package/clean-webpack-plugin)
+- [开发](https://www.webpackjs.com/guides/development/#%E4%BD%BF%E7%94%A8-webpack-dev-server)
+- [示例代码](https://github.com/1071942338/WebpackStudyNotes/tree/master/12-%20webpack%20%E8%87%AA%E5%8A%A8%E6%9E%84%E5%BB%BA)
+- [webpack-dev-server](https://www.npmjs.com/package/webpack-dev-server#getting-started)
