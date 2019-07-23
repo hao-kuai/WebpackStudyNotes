@@ -36,7 +36,6 @@
     "use strict";
     n.r(t), document.body.appendChild(function () {
         let e = document.createElement("div");
-        var t;
-        return e.innerHTML = "Hello webpack !", console.log("cube", (t = 10) * t * t), e
+        return e.innerHTML = "Hello webpack !", console.log("funcA", void console.log("方法A")), e
     }())
 }]);
