@@ -276,4 +276,4 @@ module.exports = {
 - [生成环境-最小化CSS](https://webpack.docschina.org/guides/production/#%E6%9C%80%E5%B0%8F%E5%8C%96-css)
 - [mini-css-extract-plugin](https://webpack.docschina.org/plugins/mini-css-extract-plugin/)
 - [optimize-css-assets-webpack-plugin](https://github.com/NMFR/optimize-css-assets-webpack-plugin)
-- [示例代码](https://note.youdao.com/)
+- [示例代码](https://github.com/1071942338/WebpackStudyNotes/tree/master/16-webpack%20%E5%8E%8B%E7%BC%A9%20CSS%20%E4%BB%A3%E7%A0%81)
