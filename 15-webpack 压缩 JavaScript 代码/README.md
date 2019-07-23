@@ -83,4 +83,4 @@ module.exports = {
 
 > 参考链接
 - [生产环境 压缩](https://webpack.docschina.org/guides/production/#minification-%E5%8E%8B%E7%BC%A9-)
-- [示例代码](https://note.youdao.com/)
+- [示例代码](https://github.com/1071942338/WebpackStudyNotes/tree/master/15-webpack%20%E5%8E%8B%E7%BC%A9%20JavaScript%20%E4%BB%A3%E7%A0%81)
