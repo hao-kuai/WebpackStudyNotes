@@ -372,4 +372,4 @@ Entrypoint main = main.css main.bundle.js
 
 - [管理资源-加载图片](https://webpack.docschina.org/guides/asset-management/#%E5%8A%A0%E8%BD%BD-images-%E5%9B%BE%E5%83%8F)
 - [image-webpack-loader](https://github.com/tcoopman/image-webpack-loader)
-- [示例代码](https://note.youdao.com/)
+- [示例代码](https://github.com/1071942338/WebpackStudyNotes/tree/master/17-webpack%20%E5%8E%8B%E7%BC%A9%E5%9B%BE%E7%89%87)
