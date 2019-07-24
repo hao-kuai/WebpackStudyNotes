@@ -1,5 +1,14 @@
 .hello{
     color: red;
+    width: 100px;
+    height: 100px;
+}
+.backgroundImage{
+    color: blueviolet;
+    background-image: url('./icon.jpg');
+    background-size:100% 100%;
+    width: 100px;
+    height: 100px;
 }
 .image{
     width: 100px;
