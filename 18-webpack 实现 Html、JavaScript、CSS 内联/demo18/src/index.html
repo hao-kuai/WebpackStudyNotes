@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!--  内联html  -->
+    ${require("raw-loader!./demo.inline.html").default}
+    <!--  内联js  -->
+    <script>
+        ${require("raw-loader!./demo.inline.js").default}
+    </script>
+    <!--  内联css  -->
+    <style>
+        ${require("raw-loader!./demo.inline.css").default}
+    </style>
+    <title>18-webpack 实现 Html、JavaScript、CSS 内联</title>
+</head>
+<body>
+
+</body>
+</html>
