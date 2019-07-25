@@ -230,3 +230,4 @@ console.log(something.default);
 5. [html-webpack-plugin/lib/loader.js](https://github.com/jantimon/html-webpack-plugin/blob/master/lib/loader.js)
 6. [_.template](https://www.lodashjs.com/docs/latest#_templatestring-options)
 7. [玩转 webpack 第三章](https://github.com/geektime-geekbang/geektime-webpack-course/blob/master/ppt/%E3%80%8A%E7%8E%A9%E8%BD%ACwebpack%E3%80%8B%20%E7%AC%AC%E4%B8%89%E7%AB%A0.pdf)
+8. [示例代码](https://github.com/1071942338/WebpackStudyNotes/tree/master/18-webpack%20%E5%AE%9E%E7%8E%B0%20Html%E3%80%81JavaScript%E3%80%81CSS%20%E5%86%85%E8%81%94)
