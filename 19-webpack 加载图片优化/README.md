@@ -144,7 +144,7 @@ You can also set it to 'none' to disable any default behavior. Learn more: https
 > 参考链接
 - [加载 images 图像](https://webpack.docschina.org/guides/asset-management/#%E5%8A%A0%E8%BD%BD-images-%E5%9B%BE%E5%83%8F)
 - [url-loader](https://webpack.docschina.org/loaders/url-loader)
-- [示例代码](https://note.youdao.com/)
+- [示例代码](https://github.com/1071942338/WebpackStudyNotes/tree/master/19-webpack%20%E5%8A%A0%E8%BD%BD%E5%9B%BE%E7%89%87%E4%BC%98%E5%8C%96)
 
 
 
