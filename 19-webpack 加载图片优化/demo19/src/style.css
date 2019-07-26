@@ -1,0 +1,6 @@
+.cssBackgroundImage{
+    background-image: url("./cssBackground.jpg");
+    background-size: 100% 100%;
+    width : 200px;
+    height : 200px;
+}

@@ -2,20 +2,21 @@
 1. 通过 JavaScript ，使用 file-loader
 2. 通过 CSS ，使用 style-loader
 
-其中，使用 file-loader 通过 JavaScript 加载图片的方式还可以继续优化。通过 url-loader 将小文件转换成  base64 URIs 内联到 bundle.js 中，可以减少 HTTP 请求次数。
+通过 url-loader 将小文件转换成  base64 URIs 内联到 bundle.js 中，可以减少 HTTP 请求次数。
 
 ## 一、添加图片
 
-添加2张图片
+添加3张图片
 - big.jpg  大小：51k
 - small.jpg  大小：22k
-- 
+- cssBackgroundImage.jpg  大小：22k
+
 ## 二、编辑 index.js
 
 ```
 import smallImage from './small.jpg';
 import bigImage from './big.jpg';
-
+import "./style.css"
 //添加Image
 function addImage() {
     let element = document.createElement('img');
@@ -40,6 +41,27 @@ function backgroundImage() {
 }
 document.body.appendChild(backgroundImage());
 
+//添加cssBackgroundImage
+function cssBackgroundImage() {
+    let element = document.createElement('div');
+    element.innerHTML = "cssBackgroundImage";
+    element.classList.add("cssBackgroundImage");
+    return element;
+}
+document.body.appendChild(cssBackgroundImage());
+
+
+
+```
+style.css
+
+```
+.cssBackgroundImage{
+    background-image: url("./cssBackground.jpg");
+    background-size: 100% 100%;
+    width : 200px;
+    height : 200px;
+}
 ```
 
 
@@ -84,6 +106,13 @@ module.exports = {
     module:{
         rules:[
             {
+                test:/\.css$/,
+                use:[
+                    "style-loader",
+                    "css-loader"
+                ]
+            },
+            {
                 test:/\.(png|svg|jpg|gif)$/,
                 use:[
                     {
@@ -104,24 +133,27 @@ module.exports = {
 编译成功
 
 ```
-yarn run v1.16.0
 $ webpack
-Hash: 4e7feb414df70f2697a6
+Hash: 2b4bd9fe19b64a76d77c
 Version: webpack 4.35.3
-Time: 345ms
-Built at: 07/26/2019 2:40:32 PM
+Time: 706ms
+Built at: 07/26/2019 3:05:54 PM
                                Asset      Size  Chunks             Chunk Names
 76e7e08e0b3a04a612c89ad13c999813.jpg    51 KiB          [emitted]  
-                           bundle.js  29.8 KiB       0  [emitted]  main
+                           bundle.js  64.5 KiB       0  [emitted]  main
 Entrypoint main = bundle.js
 [0] ./src/small.jpg 28.3 KiB {0} [built]
 [1] ./src/big.jpg 82 bytes {0} [built]
-[2] ./src/index.js 784 bytes {0} [built]
+[2] ./src/index.js 1.05 KiB {0} [built]
+[3] ./src/style.css 1.06 KiB {0} [built]
+[4] ./node_modules/css-loader/dist/cjs.js!./src/style.css 454 bytes {0} [built]
+[7] ./src/cssBackground.jpg 28.3 KiB {0} [built]
+    + 4 hidden modules
 
 WARNING in configuration
 The 'mode' option has not been set, webpack will fallback to 'production' for this value. Set 'mode' option to 'development' or 'production' to enable defaults for each environment.
 You can also set it to 'none' to disable any default behavior. Learn more: https://webpack.js.org/configuration/mode/
-✨  Done in 1.02s.
+✨  Done in 1.37s.
 
 ```
 输出的资源只有一张 51Kib 的图片，22Kib 的图片被转换成 base64 Uris 字符串内联到 bundle.js 中去了。
@@ -138,7 +170,7 @@ You can also set it to 'none' to disable any default behavior. Learn more: https
 ```
 ## 五、查看
 
-在Chrome 浏览器中打卡 index.html 文件，可以看到2中图片。但是单独从网络加载的图片只有 一张大图片。
+在Chrome 浏览器中打卡 index.html 文件，可以看到3中图片。但是单独从网络加载的图片只有 一张大图片。
 
 ---
 > 参考链接

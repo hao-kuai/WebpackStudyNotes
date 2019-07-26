@@ -1,6 +1,6 @@
 import smallImage from './small.jpg';
 import bigImage from './big.jpg';
-
+import "./style.css"
 //添加Image
 function addImage() {
     let element = document.createElement('img');
@@ -24,4 +24,13 @@ function backgroundImage() {
     return element;
 }
 document.body.appendChild(backgroundImage());
+
+//添加cssBackgroundImage
+function cssBackgroundImage() {
+    let element = document.createElement('div');
+    element.innerHTML = "cssBackgroundImage";
+    element.classList.add("cssBackgroundImage");
+    return element;
+}
+document.body.appendChild(cssBackgroundImage());
 
