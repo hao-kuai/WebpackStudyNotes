@@ -124,7 +124,7 @@ You can also set it to 'none' to disable any default behavior. Learn more: https
 ✨  Done in 1.02s.
 
 ```
-输出的资源只有一张 51Kib 的图片，22Kibde 的图片被转换成 base64 Uris 字符串内联到 bundle.js 中去了。
+输出的资源只有一张 51Kib 的图片，22Kib 的图片被转换成 base64 Uris 字符串内联到 bundle.js 中去了。
 
 ```
 //部分代码
