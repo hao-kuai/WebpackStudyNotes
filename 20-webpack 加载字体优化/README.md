@@ -163,7 +163,7 @@ wAJAQMACEEDAAhBAwAIAQMACEEDAAmBAwAIAQMACMEDAAhBAwAIAQMACAEDAAfBAwAHwQMAB8EDAAhBA
 > 参考链接
 - [加载 fonts 字体](https://webpack.docschina.org/guides/asset-management/#%E5%8A%A0%E8%BD%BD-fonts-%E5%AD%97%E4%BD%93)
 - [url-loader](https://webpack.docschina.org/loaders/url-loader)
-- [示例代码](https://github.com/1071942338/WebpackStudyNotes/tree/master/19-webpack%20%E5%8A%A0%E8%BD%BD%E5%9B%BE%E7%89%87%E4%BC%98%E5%8C%96)
+- [示例代码](https://github.com/1071942338/WebpackStudyNotes/tree/master/20-webpack%20%E5%8A%A0%E8%BD%BD%E5%AD%97%E4%BD%93%E4%BC%98%E5%8C%96)
 
 
 
