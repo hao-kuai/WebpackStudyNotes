@@ -1,6 +1,6 @@
 由于每次执行构建命令，webpack 都会在 dist 目录生成文件，导该目录 文件夹相当杂乱。
 通常，在每次构建前清理 dist 目录，是比较推荐的做法，因此只会生成用到的文件。通过
-[clean-webpack-plugin](https://www.npmjs.com/package/clean-webpack-plugin)  插件完成自动清理任务。
+[clean-webpack-plugin](https://www.npmjs.com/package/clean-webpack-plugin) 插件完成自动清理任务。
 
 ## 一、安装插件
 
@@ -9,6 +9,7 @@ npm install --save-dev clean-webpack-plugin
 //
 yarn add clean-webpack-plugin --dev
 ```
+
 安装成功
 
 ```
@@ -48,32 +49,35 @@ Done in 38.32s.
 
 ```
 
-
 ## 二、编辑 webpack.config.js
 
 ```
-const path = require('path');
-const HtmlWebpackPlugin  = require("html-webpack-plugin")
+const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 module.exports = {
-    entry: './src/index.js',
-    output: {
-        filename: '[name].bundle.js',
-        path: path.resolve(__dirname, 'dist')
-    },
-    plugins:[
-        new HtmlWebpackPlugin({
-            title: "10- webpack 自动生成 index.html"//配置title属性
-        }),
-    ]
+  entry: "./src/index.js",
+  output: {
+    filename: "[name].bundle.js",
+    path: path.resolve(__dirname, "dist")
+  },
+  plugins: [
+    new CleanWebpackPlugin(),
+    new HtmlWebpackPlugin({
+      title: "10- webpack 自动生成 index.html" //配置title属性
+    })
+  ]
 };
 ```
 
 ## 三、执行构建指令
+
 ```
 npm run build
 //或者
 yanr build
 ```
+
 构建完成
 
 ```
@@ -101,17 +105,18 @@ Child html-webpack-plugin for "index.html":
 Done in 2.37s.
 
 ```
+
 ## 四、 运行 index.html 文件
+
 在 Chrome 浏览器中打开文件，可以看到标题为：`10- webpack 自动生成 index.html`，内容区显示 `Hello Webpack ！`字样。而且其余多余文件被自动清理。
 
-
 ## 五、注意
+
 编辑 webpack.config.js 文件时，如果这样引入插件
 
 ```
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 ```
-
 
 会报错
 
@@ -157,12 +162,12 @@ error Command failed with exit code 1.
 info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
 
 ```
+
 正确姿势是
 
 ```
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 ```
-
 
 > 参考链接
 
